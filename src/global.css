@@ -1,0 +1,11 @@
+:root{
+    --primaryColor : #70919B;
+    --secondaryColor: #6787DC;
+    --inputBoxColor:#F3F3F3;
+    --placeHolderColor:#949494;
+    --errorColor:#EA0C26;
+    --textOnPrimaryColor:#FFFFFF;
+    --primaryHoverColor:#8EB8C6;
+    --iconColor:#D1D1D1;
+    --textColor:#555D60;
+}
