@@ -1,0 +1,18 @@
+@import "../global.css";
+
+.check_box {
+    display: flex;
+    justify-content: left;
+    font-size: 0.875rem;
+    color: var(--primaryColor);
+    cursor: pointer;
+}
+
+.box {
+    border-radius: 50%;
+    border: 1px var(--primaryColor) solid;
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.4rem;
+    background-color: #ffffff;
+}

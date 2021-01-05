@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
 @import "./global.css";
 
-*{
-    padding:0;
-    margin:0;
+* {
+    padding: 0;
+    margin: 0;
 }
-html{
-    font-family: 'Lato', sans-serif;
+html {
+    font-family: "Lato", sans-serif;
 }
 input:focus,
 select:focus,
@@ -15,6 +15,8 @@ button:focus {
     outline: none;
 }
 
-.test_area{
-    display:flex;
+.test_area {
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
 }

@@ -1,58 +1,64 @@
 @import "../global.css";
 
-.text_input{
-    display:flex;
+.text_input {
+    display: flex;
     flex-direction: column;
-    width: 15rem;
+    width: 100%;
+    margin-bottom: 0.875rem;
 }
 
-.input_box{
+.input_box {
     box-sizing: border-box;
     display: grid;
     grid-template: "inputA helperA" auto / 1fr auto;
-    align-items: center;
+    align-items: baseline;
     background-color: var(--inputBoxColor);
-    padding:0.75rem 1rem 0.75rem 1.6875rem;
+    padding: 0.75rem 1rem 0.75rem 1.6875rem;
     border-radius: 3rem;
-    border:1px var(--primaryColor) solid;
+    border: 1px var(--inputBoxColor) solid;
 }
 
-
-
-.helper_text{
+.helper_text {
     opacity: 0;
     grid-area: helperA;
-    padding-left:0.2rem;
+    padding-left: 0.2rem;
     font-size: 0.75rem;
-    color:var(--placeHolderColor);
+    color: var(--placeHolderColor);
 }
 
-input{
+input {
     grid-area: inputA;
     display: inline-block;
-    width:100%;
-    font-size:1rem;
-    border:none;
+    width: 100%;
+    font-size: 1rem;
+    border: none;
     border-radius: 0;
-    background:none;
-    font-family: 'Lato', sans-serif;
-    color:var(--textColor);
-
+    background: none;
+    font-family: "Lato", sans-serif;
+    padding-bottom: 0.23rem;
+    color: var(--textColor);
 }
-input::placeholder{
-    color:var(--placeHolderColor)   
+input::placeholder {
+    color: var(--placeHolderColor);
+    transition: opacity 0.4s;
 }
 
-input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus {
+input:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    font-family: "Lato", sans-serif;
     box-shadow: none;
     -webkit-box-shadow: 0 0 0px 1000px var(--inputBoxColor) inset;
-    -webkit-text-fill-color:var(--textColor) !important;
+    -webkit-text-fill-color: var(--textColor) !important;
 }
 
-.error_text{
-    font-size:0.75rem;
-    margin-top:0.3rem;
+.error_text {
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
     color: var(--errorColor);
-    margin-left:1.6875rem;
-
+    margin-left: 1.6875rem;
 }
