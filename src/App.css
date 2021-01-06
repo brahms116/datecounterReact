@@ -17,6 +17,7 @@ button:focus {
 
 .test_area {
     display: flex;
-    flex-direction: column;
-    width: 15rem;
+    flex-direction: row;
+    justify-content: start;
+    width: 20rem;
 }

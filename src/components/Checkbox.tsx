@@ -23,6 +23,15 @@ export default function Checkbox(props: IProps) {
         },
     };
 
+    const textVariants = {
+        hover: {
+            color: "var(--primaryHoverColor)",
+        },
+        normal: {
+            color: "var(--primaryColor)",
+        },
+    };
+
     const handleClick = () => {
         if (hoverCache === "selected") {
             setHoverCache("idle");
@@ -54,7 +63,13 @@ export default function Checkbox(props: IProps) {
                 variants={boxVariants}
                 transition={{ duration: 0.2 }}
             ></motion.div>
-            <motion.div>{props.label}</motion.div>
+            <motion.div
+                variants={textVariants}
+                animate={checkBoxState === "hover" ? "hover" : "normal"}
+                transition={{ duration: 0.2 }}
+            >
+                {props.label}
+            </motion.div>
         </div>
     );
 }

@@ -1,0 +1,16 @@
+@import "../global.css";
+
+.dropdown_item {
+    text-align: right;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    color: var(--primaryColor);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-size: 0.875rem;
+}
+
+.dropdown_item:hover {
+    background: var(--primaryHoverColor);
+    color: var(--textOnPrimaryColor);
+}

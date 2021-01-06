@@ -1,0 +1,8 @@
+@import "../global.css";
+
+.card {
+    box-shadow: var(--boxshawdow);
+    background: #ffffff;
+    border-radius: 1rem;
+    overflow: hidden;
+}

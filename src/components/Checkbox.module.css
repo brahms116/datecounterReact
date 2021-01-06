@@ -3,6 +3,7 @@
 .check_box {
     display: flex;
     justify-content: left;
+    align-items: center;
     font-size: 0.875rem;
     color: var(--primaryColor);
     cursor: pointer;
@@ -15,4 +16,5 @@
     width: 1rem;
     margin-right: 0.4rem;
     background-color: #ffffff;
+    box-sizing: border-box;
 }

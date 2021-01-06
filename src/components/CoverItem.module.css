@@ -1,0 +1,65 @@
+@import "../global.css";
+
+.cover_item {
+    padding: 0 3.17rem;
+    display: grid;
+    justify-items: center;
+    grid-template:
+        "." 3.1837rem
+        "numberA" auto
+        "." 3.17rem
+        "subtitleA" auto
+        "." 0.4rem
+        "titleA" auto
+        "." 1.5rem
+        "dateA" auto
+        "." 3.17rem / 100%;
+    color: var(--textColor);
+}
+
+.date,
+.subtitle {
+    font-size: 0.875rem;
+}
+.date {
+    grid-area: dateA;
+    text-align: center;
+}
+
+.primary {
+    color: var(--primaryColor);
+}
+
+.secondary {
+    color: var(--secondaryColor);
+}
+
+.title {
+    grid-area: titleA;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.subtitle {
+    text-align: center;
+    grid-area: subtitleA;
+}
+
+.number,
+.number_small {
+    text-align: center;
+    grid-area: numberA;
+}
+
+.number {
+    font-size: 4.5rem;
+}
+
+.number_small {
+    font-size: 2rem;
+}
+
+@media screen and (min-width: 600px) {
+    .cover_item {
+    }
+}

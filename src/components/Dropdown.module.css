@@ -1,0 +1,31 @@
+@import "../global.css";
+
+.icon,
+.large_icon {
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.large_icon {
+    width: 2.25rem;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.divider {
+    height: 1px;
+    background: var(--inputBoxColor);
+}
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    top: 110%;
+    right: 0.2rem;
+}

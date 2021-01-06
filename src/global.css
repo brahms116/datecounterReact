@@ -1,11 +1,12 @@
-:root{
-    --primaryColor : #70919B;
-    --secondaryColor: #6787DC;
-    --inputBoxColor:#F3F3F3;
-    --placeHolderColor:#949494;
-    --errorColor:#EA0C26;
-    --textOnPrimaryColor:#FFFFFF;
-    --primaryHoverColor:#8EB8C6;
-    --iconColor:#D1D1D1;
-    --textColor:#555D60;
+:root {
+    --primaryColor: #70919b;
+    --secondaryColor: #6787dc;
+    --inputBoxColor: #f3f3f3;
+    --placeHolderColor: #949494;
+    --errorColor: #ea0c26;
+    --textOnPrimaryColor: #ffffff;
+    --primaryHoverColor: #8eb8c6;
+    --iconColor: #d1d1d1;
+    --textColor: #555d60;
+    --boxshawdow: 0px 20px 20px #f0f0f0;
 }
