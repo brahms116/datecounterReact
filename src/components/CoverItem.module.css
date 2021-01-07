@@ -59,7 +59,29 @@
     font-size: 2rem;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
     .cover_item {
+        grid-template:
+            ". numberA" 4.125rem
+            "subtitleA numberA" auto
+            ". numberA" 0.25rem
+            "titleA numberA" auto
+            ". numberA" 0.875rem
+            "dateA numberA" auto
+            ". numberA" 4.06rem / 1fr auto;
+    }
+
+    .title,
+    .subtitle,
+    .date {
+        text-align: left;
+        justify-self: left;
+    }
+
+    .number,
+    .number_small {
+        text-align: right;
+        justify-self: right;
+        align-self: center;
     }
 }

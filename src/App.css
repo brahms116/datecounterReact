@@ -16,8 +16,8 @@ button:focus {
 }
 
 .test_area {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    justify-content: start;
-    width: 20rem;
+    justify-content: center; */
+    width: 48rem;
 }

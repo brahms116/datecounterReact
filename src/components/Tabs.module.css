@@ -1,0 +1,15 @@
+@import "../global.css";
+
+.tabs {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+}
+
+.tab_item {
+    color: var(--iconColor);
+    text-align: center;
+    padding: 1.25rem 0;
+    border-bottom: 1px var(--iconColor) solid;
+    cursor: pointer;
+}
