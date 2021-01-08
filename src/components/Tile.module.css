@@ -1,0 +1,34 @@
+@import "../global.css";
+
+.tile {
+    display: flex;
+    align-items: baseline;
+    color: var(--textColor);
+    box-sizing: border-box;
+    padding: 1rem 0 1.3rem 0;
+}
+
+.title {
+    width: 50%;
+    font-size: 1.125rem;
+}
+
+.primary {
+    color: var(--primaryColor);
+}
+
+.secondary {
+    color: var(--secondaryColor);
+}
+
+.number {
+    text-align: right;
+    flex: 1;
+    margin-right: 0.51rem;
+    font-size: 1.5rem;
+}
+
+.dropdown {
+    position: relative;
+    top: 0.1rem;
+}

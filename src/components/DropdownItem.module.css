@@ -8,6 +8,7 @@
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
     font-size: 0.875rem;
+    white-space: nowrap;
 }
 
 .dropdown_item:hover {

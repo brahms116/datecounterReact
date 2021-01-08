@@ -59,7 +59,7 @@ export default function Dropdown(props: IProps) {
                 opacity: 1,
             });
             await menuAnimationControls.start({
-                display: "block",
+                display: "none",
                 opacity: 0,
                 transition: { duration: 0 },
             });
@@ -80,12 +80,9 @@ export default function Dropdown(props: IProps) {
             <motion.div
                 className={props.isLarge ? styles.large_icon : styles.icon}
                 animate={iconAnimationControls}
+                onClick={handleIconClick}
             >
-                <img
-                    src={isMenuOpen ? closeIcon : moreIcon}
-                    alt=""
-                    onClick={handleIconClick}
-                />
+                <img src={isMenuOpen ? closeIcon : moreIcon} alt="" />
             </motion.div>
             <motion.div
                 className={styles.dropdown_menu}
