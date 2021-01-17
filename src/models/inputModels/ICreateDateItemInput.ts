@@ -1,3 +1,4 @@
-import IDateItem from "../dataModels/IDateItem";
-
-export default interface ICreateItemInput extends IDateItem {}
+export default interface ICreateItemInput {
+    date: Date;
+    title: string;
+}

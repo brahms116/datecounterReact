@@ -1,0 +1,53 @@
+@import "../global.css";
+
+.page {
+    display: grid;
+    grid-template:
+        "." 7.5rem
+        "imgA" auto
+        "." 6rem
+        "titleA" auto
+        "." 4rem
+        "login_buttonA" auto
+        "." 1rem
+        "register_buttonA" auto
+        "." 5.75rem /100%;
+    width: 18rem;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+.logo {
+    grid-area: imgA;
+}
+
+.title {
+    grid-area: titleA;
+    color: var(--primaryColor);
+    font-size: 2rem;
+    text-align: center;
+}
+
+.login_button,
+.register_button {
+    width: 100%;
+}
+
+.login_button {
+    grid-area: login_buttonA;
+}
+
+.register_button {
+    grid-area: register_buttonA;
+}
+
+@media screen and (min-width: 768px) {
+    .page {
+        margin-top: 8rem;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .page {
+        margin-top: 0rem;
+    }
+}

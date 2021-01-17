@@ -1,0 +1,64 @@
+@import "../global.css";
+
+.page {
+    display: grid;
+    grid-template:
+        "." 6rem
+        "titleA" auto
+        "." 4.875rem
+        "emailA" auto
+        "." 0.8rem
+        "passwordA" auto
+        "." 0.8rem
+        "rememberA" auto
+        "." 1rem
+        "serverA" auto
+        "loginA" auto
+        "." 5.75rem / 100%;
+    width: 18rem;
+    margin: 0 auto;
+}
+
+.error {
+    grid-area: serverA;
+    font-size: 0.75rem;
+    color: var(--errorColor);
+    margin-bottom: 3.3rem;
+    padding-left: 0rem;
+}
+.title {
+    grid-area: titleA;
+    color: var(--primaryColor);
+    font-size: 2rem;
+    text-align: center;
+}
+
+.email {
+    grid-area: emailA;
+}
+
+.password {
+    grid-area: passwordA;
+}
+.remember_me {
+    grid-area: rememberA;
+}
+
+.login {
+    grid-area: loginA;
+}
+
+@media screen and (min-width: 768px) {
+    .page {
+        margin-top: 8rem;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .page {
+        margin-top: 0rem;
+    }
+}
+.spinner {
+    grid-area: loginA;
+    justify-self: center;
+}

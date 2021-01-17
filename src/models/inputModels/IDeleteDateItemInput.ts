@@ -1,3 +1,3 @@
-export default interface IDeleteDateItem {
+export default interface IDeleteDateItemInput {
     id: number;
 }

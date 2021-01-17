@@ -44,7 +44,8 @@ export default function Dropdown(props: IProps) {
     };
 
     const closeMenu = async () => {
-        if (!isAnimating) {
+        // console.log("what the heck");
+        if (!isAnimating && isMenuOpen) {
             setIsAnimating(true);
             await Promise.all([
                 menuAnimationControls.start({
@@ -82,7 +83,11 @@ export default function Dropdown(props: IProps) {
                 animate={iconAnimationControls}
                 onClick={handleIconClick}
             >
-                <img src={isMenuOpen ? closeIcon : moreIcon} alt="" />
+                <img
+                    src={isMenuOpen ? closeIcon : moreIcon}
+                    alt=""
+                    className={styles.img}
+                />
             </motion.div>
             <motion.div
                 className={styles.dropdown_menu}

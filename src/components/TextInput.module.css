@@ -23,6 +23,7 @@
     grid-area: helperA;
     padding-left: 0.2rem;
     font-size: 0.75rem;
+    max-width: 4rem;
     color: var(--placeHolderColor);
 }
 

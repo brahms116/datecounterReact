@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import styles from "./TextInput.module.css";
 import { motion } from "framer-motion";
 
 interface IProps {
     label: string;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    helpertext?: string;
     isPassword?: boolean;
     error?: string;
+    value?: string;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export default function TextInput(props: IProps) {
@@ -44,6 +48,9 @@ export default function TextInput(props: IProps) {
                 <input
                     type={props.isPassword ? "password" : "text"}
                     placeholder={props.label}
+                    value={props.value ? props.value : ""}
+                    onChange={props.onChange}
+                    onKeyDown={props.onKeyDown}
                 ></input>
                 {/* {isFocus && <div className={styles.helper_text}>EMAIL</div>} */}
                 <motion.div
@@ -51,7 +58,7 @@ export default function TextInput(props: IProps) {
                     animate={isFocus ? "focus" : "blur"}
                     variants={helperVariants}
                 >
-                    {props.label}
+                    {props.helpertext ? props.helpertext : props.label}
                 </motion.div>
             </motion.div>
             {props.error && (

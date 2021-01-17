@@ -1,4 +1,50 @@
 @import "../global.css";
 
-.page {
+.with_card {
+    display: none;
+}
+
+.logo {
+    display: none;
+}
+
+.spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width: 1000px) {
+    .page {
+        display: grid;
+        grid-template:
+            ". . ." 7.5rem
+            ". cardA ." auto
+            / 1fr auto 1fr;
+    }
+    .with_card {
+        grid-area: cardA;
+        display: inline-block;
+    }
+    .without_card {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .page {
+        min-height: 100vh;
+        grid-template:
+            "logoA . ." 7.5rem
+            "logoA cardA ." auto
+            / 1fr auto 10%;
+    }
+    .logo {
+        grid-area: logoA;
+        display: block;
+        margin-top: 13.234rem;
+        justify-self: center;
+        width: 25rem;
+    }
 }

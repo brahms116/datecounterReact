@@ -1,0 +1,150 @@
+@import "../global.css";
+
+.page {
+    padding: 3rem 11%;
+}
+
+.main {
+    display: grid;
+    grid-template:
+        "titleA" auto
+        "." 3.475rem
+        "coverA" auto
+        "." 3.3rem
+        "tabA" auto
+        "." 2rem
+        "tileA" auto
+        "." 4rem / 100%;
+}
+
+.title_section {
+    grid-area: titleA;
+    display: flex;
+    justify-content: space-between;
+    color: var(--primaryColor);
+    font-size: 3.5rem;
+}
+
+.title_ld_button {
+    display: none;
+}
+
+.cover {
+    grid-area: coverA;
+}
+
+.sd_tab {
+    grid-area: tabA;
+}
+
+.tile_sd {
+    grid-area: tileA;
+}
+
+.tile_ld {
+    display: none;
+    grid-template:
+        "primary_labelA . secondary_labelA" auto
+        ". . ." 2rem
+        "primary_itemsA . secondary_itemsA" auto/ 1fr 4.125rem 1fr;
+}
+
+.primary_label {
+    grid-area: primary_labelA;
+    color: var(--primaryColor);
+}
+.secondary_label {
+    grid-area: secondary_labelA;
+    color: var(--secondaryColor);
+}
+
+.primary_items {
+    grid-area: primary_itemsA;
+}
+
+.secondary_items {
+    grid-area: secondary_itemsA;
+}
+
+.floating_button {
+    border-radius: 5rem;
+    background: transparent;
+    position: fixed;
+    top: 92%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: var(--boxshawdow);
+}
+
+.header {
+    display: none;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4.0625rem;
+    padding: 0 3rem;
+    box-sizing: border-box;
+}
+
+.navigation {
+    font-size: 1.125rem;
+    color: var(--textColor);
+    cursor: pointer;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: var(--primaryColor);
+}
+
+.logo_icon {
+    width: 2rem;
+    margin-right: 0.4rem;
+}
+
+@media screen and (min-width: 768px) {
+    .page {
+        padding: 4.375rem 7.5rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .page {
+        padding: 0;
+    }
+    .main {
+        width: 43rem;
+        margin-top: 9.857rem;
+        margin-left: 8rem;
+    }
+    .header {
+        display: flex;
+    }
+    .sd_tab {
+        display: none;
+    }
+    .tile_sd {
+        display: none;
+    }
+    .tile_ld {
+        grid-area: tileA;
+        display: grid;
+    }
+    .title_sd_dropdown {
+        display: none;
+    }
+    .title_ld_button {
+        display: block;
+    }
+    .floating_button {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .main {
+        width: 60%;
+    }
+}

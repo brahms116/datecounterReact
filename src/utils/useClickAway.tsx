@@ -6,6 +6,7 @@ const useClickOutside = (
 ) => {
     const handleClick = (evt: MouseEvent) => {
         if (ref.current && !ref.current.contains(evt.target as Node)) {
+            // console.log("uhoh");
             cb();
         }
     };

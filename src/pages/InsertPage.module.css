@@ -1,0 +1,35 @@
+@import "../global.css";
+
+.icon {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.main {
+    display: grid;
+    grid-template:
+        ". . ." 20vh
+        ". titleA ." auto
+        ". . ." 3.5rem
+        ". inputA ." auto
+        ". . ." 1rem
+        ". submitA ." auto / 1fr 15rem 1fr;
+}
+
+.title {
+    grid-area: titleA;
+    font-size: 2rem;
+    color: var(--primaryColor);
+    text-align: center;
+}
+
+.text_input {
+    grid-area: inputA;
+}
+
+.submit_button {
+    grid-area: submitA;
+}

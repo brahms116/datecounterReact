@@ -1,0 +1,20 @@
+@import "../global.css";
+
+.spinner {
+    border: 0.2rem solid var(--inputBoxColor);
+    border-top: 0.2rem solid var(--primaryColor); /* Blue */
+    border-radius: 50%;
+    width: 2.875rem;
+    height: 2.875rem;
+    box-sizing: border-box;
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,10 +1,11 @@
 import ILoginInput from "../inputModels/ILoginInput";
+import ILoginOutput from "../outputModels/ILoginOutput";
 
 export default interface IAuthContext {
     token: string;
     isAuth: boolean;
-    rememberMe: boolean;
-    login: (input: ILoginInput) => void;
-    register: (input: ILoginInput) => void;
+    initialTokenCheck: () => Promise<boolean>;
+    login: (input: ILoginInput) => Promise<ILoginOutput>;
+    register: (input: ILoginInput) => Promise<ILoginOutput>;
     logout: () => {};
 }
