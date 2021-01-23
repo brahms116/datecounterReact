@@ -30,7 +30,7 @@ export default function CoverItem(props: IProps) {
                             : styles.primary
                     }`}
                 >
-                    {props.item.daysDiff}
+                    {+props.item.daysDiff === 0 ? "TODAY" : props.item.daysDiff}
                 </div>
             </div>
         </Card>

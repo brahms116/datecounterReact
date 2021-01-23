@@ -90,6 +90,7 @@ const DbService = {
                 Authorization: `bearer ${token}`,
             },
         });
+        console.log(result);
         return await handleResult<IDateItemResponse>(result);
     },
     getItems: async (token: string) => {

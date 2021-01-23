@@ -39,8 +39,10 @@ export default function HomePage() {
     };
 
     const onSetCover = async (id: number) => {
+        // console.log(id);
         await swapPresence(pageController, spinnerController);
         const result = await appData.events.assignCoverItem(id);
+        // console.log(result);
         if (!result.error) {
             await swapPresence(spinnerController, pageController);
         }
