@@ -1,7 +1,9 @@
 import IDateItem from "../dataModels/IDateItem";
 import IOutput from "./IOutput";
 
-export interface IDateItemResponseData extends IDateItem {}
+export interface IDateItemResponseData {
+    item: IDateItem;
+}
 
 export default interface IDateItemResponse extends IOutput {
     payload: IDateItemResponseData;

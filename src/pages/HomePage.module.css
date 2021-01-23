@@ -70,7 +70,7 @@
     border-radius: 5rem;
     background: transparent;
     position: fixed;
-    top: 92%;
+    top: 90%;
     left: 50%;
     transform: translateX(-50%);
     box-shadow: var(--boxshawdow);
@@ -104,6 +104,15 @@
     margin-right: 0.4rem;
 }
 
+.empty_state {
+    text-align: center;
+    padding-top: 1.8rem;
+    color: var(--iconColor);
+    font-size: 0.875rem;
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (min-width: 768px) {
     .page {
         padding: 4.375rem 7.5rem;
@@ -111,6 +120,10 @@
 }
 
 @media screen and (min-width: 1000px) {
+    .empty_state {
+        text-align: left;
+        justify-content: start;
+    }
     .page {
         padding: 0;
     }

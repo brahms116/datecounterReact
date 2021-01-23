@@ -6,7 +6,7 @@ interface IProps {
     label: string;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     helpertext?: string;
-    isPassword?: boolean;
+    type: string;
     error?: string;
     value?: string;
     onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -14,6 +14,10 @@ interface IProps {
 
 export default function TextInput(props: IProps) {
     const [isFocus, setIsFocus] = useState(false);
+    let inputType = "text";
+    if (props.type === "password") {
+        inputType = props.type;
+    }
     const boxVariants = {
         blur: {
             borderColor: "var(--inputBoxColor)",
@@ -46,7 +50,8 @@ export default function TextInput(props: IProps) {
                 className={styles.input_box}
             >
                 <input
-                    type={props.isPassword ? "password" : "text"}
+                    inputMode={props.type === "number" ? "numeric" : "text"}
+                    type={inputType}
                     placeholder={props.label}
                     value={props.value ? props.value : ""}
                     onChange={props.onChange}

@@ -7,7 +7,10 @@ export default interface IValidationError extends IError {
 export const isValidationError = (
     error: IError | IValidationError
 ): error is IValidationError => {
-    return (error as IValidationError).errors !== undefined;
+    return (
+        (error as IValidationError).errors !== undefined ||
+        (error as IValidationError).errors === null
+    );
 };
 
 export interface IValidationErrorItem {

@@ -45,7 +45,7 @@ export default function Dropdown(props: IProps) {
 
     const closeMenu = async () => {
         // console.log("what the heck");
-        if (!isAnimating && isMenuOpen) {
+        if (isMenuOpen) {
             setIsAnimating(true);
             await Promise.all([
                 menuAnimationControls.start({
@@ -81,12 +81,12 @@ export default function Dropdown(props: IProps) {
             <motion.div
                 className={props.isLarge ? styles.large_icon : styles.icon}
                 animate={iconAnimationControls}
-                onClick={handleIconClick}
             >
                 <img
                     src={isMenuOpen ? closeIcon : moreIcon}
                     alt=""
                     className={styles.img}
+                    onClick={handleIconClick}
                 />
             </motion.div>
             <motion.div
@@ -98,11 +98,18 @@ export default function Dropdown(props: IProps) {
                         if (i < count - 1) {
                             return (
                                 <div>
-                                    {child}
+                                    {React.cloneElement(
+                                        child as React.ReactElement,
+                                        { animationClose: closeMenu }
+                                    )}
                                     <div className={styles.divider} />
                                 </div>
                             );
-                        } else return child;
+                        } else
+                            return React.cloneElement(
+                                child as React.ReactElement,
+                                { animationClose: closeMenu }
+                            );
                     })}
                 </Card>
             </motion.div>

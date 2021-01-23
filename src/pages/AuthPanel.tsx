@@ -11,13 +11,11 @@ import TextInput from "../components/TextInput";
 import Checkbox from "../components/Checkbox";
 import BackIcon from "../media/BackIcon.svg";
 import Spinner from "../components/Spinner";
-import { useContext, useEffect, useState } from "react";
-import Validation from "../services/ValidationService";
-import ILoginOutput from "../models/outputModels/ILoginOutput";
+import { useContext, useState } from "react";
 import swapPresence from "../utils/swapPresence";
-import { authContext } from "../Contexts/AuthContext";
-import { isValidationError } from "../models/dataModels/IValidationError";
-import { dateItemContext } from "../Contexts/DateItemContext";
+import { dataContext } from "../Contexts/DataContext";
+import handleFormError from "../utils/handleFormError";
+import handleFormSubmit from "../utils/handleFormSubmit";
 
 interface IProps {
     fadeOut: () => Promise<void>;
@@ -91,38 +89,13 @@ function Login(props: IProps) {
     const buttonControl = useAnimation();
     const loaderControl = useAnimation();
 
-    const authC = useContext(authContext);
-    const dateItemC = useContext(dateItemContext);
+    const appData = useContext(dataContext);
 
     //helper function to populate the error fields of inputs
-    const populateErrors = (result: ILoginOutput) => {
-        if (result.error) {
-            if (isValidationError(result.error)) {
-                for (const error of result.error.errors) {
-                    switch (error.field) {
-                        case "email":
-                            setEmailError(error.msg);
-                            break;
-                        case "password":
-                            setPasswordError(error.msg);
-                    }
-                }
-            } else {
-                setServerError(result.error.msg);
-            }
-        } else {
-            setServerError("Server Error");
-        }
-    };
-
-    //console.log(serverError.length > 0);
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        //console.log(event.key);
-        if (event.key === "Enter") {
-            event.currentTarget.blur();
-            handleLogin();
-        }
-    };
+    const populateErrors = handleFormError(
+        ["email", "password", "server"],
+        [setEmailError, setPasswordError, setServerError]
+    );
 
     //login procedure
     const handleLogin = async () => {
@@ -130,47 +103,18 @@ function Login(props: IProps) {
         setEmailError("");
         setPasswordError("");
         setServerError("");
-
-        //frontend validation from validation service
-        const frontEndValidateResult = Validation.validateLoginInput(
-            email,
-            password
-        );
-        //populate errors
-        if (!frontEndValidateResult.isSuccess) {
-            populateErrors(frontEndValidateResult);
-            return;
-        }
-
-        //if no validations so far begin request to server...
         //swap button and loader
         await swapPresence(buttonControl, loaderControl);
-
         //register request
-        const serverResult = await authC.login({
-            credientials: { email, password },
-            rememberMe,
-        });
-        // console.log(authC.token);
-        // check for validationErrors
-        if (!serverResult.isSuccess) {
+        const result = await appData.events.login(email, password, rememberMe);
+        if (!result.isSuccess) {
             await swapPresence(loaderControl, buttonControl);
-            populateErrors(serverResult);
-        }
-    };
-
-    const moveToNextPage = async () => {
-        const result = await dateItemC.getItems();
-        if (result.isSuccess) {
+            populateErrors(result.error!);
+        } else {
             await props.fadeOut();
             history.push("/home");
         }
     };
-    useEffect(() => {
-        if (authC.isAuth === true) {
-            moveToNextPage();
-        }
-    }, [authC.isAuth]);
 
     return (
         <TransitionDiv className={loginStyles.page}>
@@ -186,25 +130,26 @@ function Login(props: IProps) {
 
             <div className={loginStyles.email}>
                 <TextInput
+                    type="text"
                     label="EMAIL"
                     onChange={(e) => {
                         setEmail(e.currentTarget.value);
                     }}
                     value={email}
                     error={emailError}
-                    onKeyDown={handleKeyDown}
+                    onKeyDown={(e) => handleFormSubmit(e, handleLogin)}
                 ></TextInput>
             </div>
             <div className={loginStyles.password}>
                 <TextInput
                     label="PASSWORD"
-                    isPassword
+                    type="password"
                     onChange={(e) => {
                         setPassword(e.currentTarget.value);
                     }}
                     value={password}
                     error={passwordError}
-                    onKeyDown={handleKeyDown}
+                    onKeyDown={(e) => handleFormSubmit(e, handleLogin)}
                 ></TextInput>
             </div>
 
@@ -256,92 +201,41 @@ function Register(props: IProps) {
     const buttonControl = useAnimation();
     const loaderControl = useAnimation();
 
-    const authC = useContext(authContext);
-    const dateItemC = useContext(dateItemContext);
+    const appData = useContext(dataContext);
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        //console.log(event.key);
-        if (event.key === "Enter") {
-            event.currentTarget.blur();
-            handleRegister();
-        }
-    };
+    const populateErrors = handleFormError(
+        ["email", "password", "server"],
+        [setEmailError, setPasswordError, setServerError]
+    );
 
-    //helper function to populate the error fields of inputs
-    const populateErrors = (result: ILoginOutput) => {
-        if (result.error) {
-            if (isValidationError(result.error)) {
-                for (const error of result.error.errors) {
-                    switch (error.field) {
-                        case "email":
-                            setEmailError(error.msg);
-                            break;
-                        case "password":
-                            setPasswordError(error.msg);
-                    }
-                }
-            } else {
-                setServerError(result.error.msg);
-            }
-        } else {
-            setServerError("Server Error");
-        }
-    };
-
-    //register procedure
+    //login procedure
     const handleRegister = async () => {
         //clear validation errors
+        setConfirmPasswordError("");
         setEmailError("");
         setPasswordError("");
-        setConfirmPasswordError("");
         setServerError("");
 
-        //check if passwords match
-        if (password !== confirmPassword) {
+        if (confirmPassword !== password) {
             setConfirmPasswordError("PASSWORDS DO NOT MATCH");
             return;
         }
-
-        //frontend validation from validation service
-        const frontEndValidateResult = Validation.validateRegisterInput(
-            email,
-            password
-        );
-        //populate errors
-        if (!frontEndValidateResult.isSuccess) {
-            populateErrors(frontEndValidateResult);
-            return;
-        }
-
-        //if no validations so far begin request to server...
         //swap button and loader
         await swapPresence(buttonControl, loaderControl);
-
         //register request
-        const serverResult = await authC.register({
-            credientials: { email, password },
-            rememberMe,
-        });
-
-        //check for validationErrors
-        if (!serverResult.isSuccess) {
+        const result = await appData.events.register(
+            email,
+            password,
+            rememberMe
+        );
+        if (!result.isSuccess) {
             await swapPresence(loaderControl, buttonControl);
-            populateErrors(serverResult);
-        }
-    };
-
-    const moveToNextPage = async () => {
-        const result = await dateItemC.getItems();
-        if (result.isSuccess) {
+            populateErrors(result.error!);
+        } else {
             await props.fadeOut();
             history.push("/home");
         }
     };
-    useEffect(() => {
-        if (authC.isAuth === true) {
-            moveToNextPage();
-        }
-    }, [authC.isAuth]);
 
     return (
         <TransitionDiv className={registerStyles.page}>
@@ -356,6 +250,7 @@ function Register(props: IProps) {
             <div className={registerStyles.title}>SIGN UP</div>
             <div className={registerStyles.email}>
                 <TextInput
+                    type="text"
                     label="EMAIL"
                     onChange={(e) => {
                         setEmail(e.currentTarget.value);
@@ -363,32 +258,32 @@ function Register(props: IProps) {
                     }}
                     value={email}
                     error={emailError}
-                    onKeyDown={handleKeyDown}
+                    onKeyDown={(e) => handleFormSubmit(e, handleRegister)}
                 ></TextInput>
             </div>
             <div className={registerStyles.password}>
                 <TextInput
                     label="PASSWORD"
-                    isPassword
+                    type="password"
                     onChange={(e) => {
                         setPassword(e.currentTarget.value);
                     }}
                     value={password}
                     error={passwordError}
-                    onKeyDown={handleKeyDown}
+                    onKeyDown={(e) => handleFormSubmit(e, handleRegister)}
                 ></TextInput>
             </div>
             <div className={registerStyles.confirm_password}>
                 <TextInput
                     label="CONFIRM PASSWORD"
-                    isPassword
+                    type="password"
                     helpertext="PASSWORD"
                     onChange={(e) => {
                         setConfirmPassword(e.currentTarget.value);
                     }}
                     value={confirmPassword}
                     error={confirmPasswordError}
-                    onKeyDown={handleKeyDown}
+                    onKeyDown={(e) => handleFormSubmit(e, handleRegister)}
                 ></TextInput>
             </div>
             <div className={registerStyles.remember_me}>

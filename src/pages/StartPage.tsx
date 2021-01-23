@@ -4,35 +4,42 @@ import AuthPanel from "./AuthPanel";
 import styles from "./StartPage.module.css";
 import Logo from "../media/Logo.svg";
 import { motion, useAnimation } from "framer-motion";
-import Spinner from "../components/Spinner";
 import swapPresence from "../utils/swapPresence";
-import { authContext } from "../Contexts/AuthContext";
+
+import { useHistory } from "react-router-dom";
+import { dataContext } from "../Contexts/DataContext";
+import TransitionDiv from "../utils/TransitionDiv";
+import PageSpinner from "../components/PageSpinner";
 
 export default function StartPage() {
-    const controller = useAnimation();
+    const history = useHistory();
     const fadeOut = async () => {
-        await controller.start({
-            opacity: 0,
-        });
+        // await controller.start({
+        //     opacity: 0,
+        // });
     };
 
-    const authC = useContext(authContext);
+    const appData = useContext(dataContext);
     const spinnerController = useAnimation();
     const pageController = useAnimation();
 
     const checktoken = async () => {
-        const result = await authC.initialTokenCheck();
-        if (!result) {
+        const result = await appData.events.appInit();
+        if (!result.isSuccess) {
             await swapPresence(spinnerController, pageController, "grid");
+        } else {
+            history.push("/home");
         }
     };
     useEffect(() => {
         checktoken();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
     return (
-        <motion.div animate={controller}>
-            <motion.div className={styles.spinner} animate={spinnerController}>
-                <Spinner />
+        <TransitionDiv>
+            <motion.div animate={spinnerController}>
+                <PageSpinner />
             </motion.div>
             <motion.div
                 className={styles.page}
@@ -49,6 +56,6 @@ export default function StartPage() {
                     <AuthPanel fadeOut={fadeOut} />
                 </div>
             </motion.div>
-        </motion.div>
+        </TransitionDiv>
     );
 }

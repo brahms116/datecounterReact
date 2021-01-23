@@ -1,29 +1,37 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import StartPage from "./pages/StartPage";
 import { motion } from "framer-motion";
-import DataProvider from "./Contexts/DataProvider";
 import HomePage from "./pages/HomePage";
 import InsertPage from "./pages/InsertPage";
+import DataContext from "./Contexts/DataContext";
+import HomeRoute from "./routes/HomeRoute";
+import InsertRoute from "./routes/InsertRoute";
 
 function App() {
+    const location = useLocation();
+    let key: string;
+    if (location.pathname === "/home") key = "home";
+    else if (location.pathname === "/insert") key = "insert";
+    else key = "start";
+    console.log(location.pathname);
     return (
-        <DataProvider>
+        <DataContext>
             <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-                <Switch>
-                    <Route exact path="/home">
+                <Switch location={location} key={key}>
+                    <HomeRoute exact path="/home">
                         <HomePage></HomePage>
-                    </Route>
-                    <Route exact path="/insert">
+                    </HomeRoute>
+                    <InsertRoute exact path="/insert">
                         <InsertPage></InsertPage>
-                    </Route>
+                    </InsertRoute>
                     <Route path="/">
                         <StartPage></StartPage>
                     </Route>
                 </Switch>
             </motion.div>
-        </DataProvider>
+        </DataContext>
     );
 }
 

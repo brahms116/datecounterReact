@@ -1,6 +1,5 @@
-import { unescapeLeadingUnderscores } from "typescript";
 import { IValidationErrorItem } from "../models/dataModels/IValidationError";
-import ILoginOutput from "../models/outputModels/ILoginOutput";
+import IEventOutput from "../models/outputModels/IEventOutput";
 
 const Validation = {
     validateRegisterInput: (email: string, password: string) => {
@@ -15,6 +14,7 @@ const Validation = {
                 msg: "PLEASE PUT A VALID EMAIL",
             } as IValidationErrorItem);
         }
+
         if (password.length < 6) {
             validationErrors.push({
                 field: "password",
@@ -22,6 +22,12 @@ const Validation = {
             });
         }
 
+        if (password.match(/\s/g)) {
+            validationErrors.push({
+                field: "password",
+                msg: "PASSWORD CANNOT HAVE BLANKS",
+            });
+        }
         if (password.length === 0) {
             validationErrors.push({
                 field: "password",
@@ -37,11 +43,11 @@ const Validation = {
                     msg: "There are some validation errors",
                     errors: validationErrors,
                 },
-            } as ILoginOutput;
+            } as IEventOutput;
         } else {
             return {
                 isSuccess: true,
-            } as ILoginOutput;
+            } as IEventOutput;
         }
     },
     validateLoginInput: (email: string, password: string) => {
@@ -64,11 +70,39 @@ const Validation = {
                     msg: "There are some validation errors",
                     errors: validationErrors,
                 },
-            } as ILoginOutput;
+            } as IEventOutput;
         } else {
             return {
                 isSuccess: true,
-            } as ILoginOutput;
+            } as IEventOutput;
+        }
+    },
+    validateDateItemTitle(title: string) {
+        const validationErrors: IValidationErrorItem[] = [];
+        if (title.length === 0)
+            validationErrors.push({
+                field: "title",
+                msg: "TITLE CANNOT BE BLANK",
+            });
+        if (/^\s.*\s$/g.test(title)) {
+            validationErrors.push({
+                field: "title",
+                msg: "CANNOT START OR END WITH BLANKS",
+            });
+        }
+        if (validationErrors.length > 0) {
+            return {
+                isSuccess: false,
+                payload: undefined,
+                error: {
+                    msg: "There are some validation errors",
+                    errors: validationErrors,
+                },
+            } as IEventOutput;
+        } else {
+            return {
+                isSuccess: true,
+            } as IEventOutput;
         }
     },
 };

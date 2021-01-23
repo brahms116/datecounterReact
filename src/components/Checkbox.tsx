@@ -37,6 +37,7 @@ export default function Checkbox(props: IProps) {
             setHoverCache("idle");
             setCheckBoxState("idle");
         } else {
+            props.onClick();
             setHoverCache("selected");
             setCheckBoxState("selected");
         }

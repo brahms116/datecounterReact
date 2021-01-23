@@ -1,22 +1,20 @@
 import styles from "./Tile.module.css";
-import { motion } from "framer-motion";
 import Dropdown from "./Dropdown";
 import DropdownItem from "./DropdownItem";
+import React, { useContext } from "react";
+import TransitionDiv from "../utils/TransitionDiv";
+import { tileContext } from "../pages/HomePage";
 interface IProps {
     title: string;
-    numDays: number;
+    numDays: string;
     id: number;
     isSecondary?: boolean;
 }
 
 export default function Tile(props: IProps) {
+    const tileC = useContext(tileContext);
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={styles.tile}
-        >
+        <TransitionDiv className={styles.tile}>
             <div className={styles.title}>{props.title}</div>
             <div
                 className={`${styles.number} ${
@@ -29,14 +27,18 @@ export default function Tile(props: IProps) {
                 <Dropdown>
                     <DropdownItem
                         label="DELETE MY CARD"
-                        onClick={() => {}}
+                        onClick={() => {
+                            tileC.onDelete(props.id);
+                        }}
                     ></DropdownItem>
                     <DropdownItem
                         label="SET AS COVER"
-                        onClick={() => {}}
+                        onClick={() => {
+                            tileC.onSetCover(props.id);
+                        }}
                     ></DropdownItem>
                 </Dropdown>
             </div>
-        </motion.div>
+        </TransitionDiv>
     );
 }
