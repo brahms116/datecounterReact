@@ -3,7 +3,7 @@ import IGetItemsResponse from "../models/outputModels/IGetItemsResponse";
 import ILoginResponse from "../models/outputModels/ILoginResponse";
 import IRegisterResponse from "../models/outputModels/IRegisterResponse";
 
-const url = "http://backend.davidkwong.net/datecounter/api";
+const url = "https://backend.davidkwong.net/datecounter/api";
 
 const handleResult = async <T>(result: Response) => {
     if (!result.ok) {
